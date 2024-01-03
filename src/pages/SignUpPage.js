@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import BackgroundImage from "../components/BackgroundImage";
 import Header from "../components/Header";
 import styled from "styled-components";
 
 function SignUpPage() {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <Container>
       <BackgroundImage />
       <div className="content">
-        <Header signin />
+        <Header login={showPassword} />
         <div className="body">
           <div className="text">
             <h1>Unlimited movies,TV shows and More</h1>
@@ -18,10 +19,20 @@ function SignUpPage() {
             </h6>
           </div>
           <div className="form">
-            <input type="password" placeholder="password" name="password" />
-            <input input="email" placeholder="email address" name="email" />
-            <button>Get Started</button>
-            <button>Sign Up</button>
+            {showPassword ? (
+              <input type="password" placeholder="password" name="password" />
+            ) : (
+              <input input="email" placeholder="email address" name="email" />
+            )}
+            {!showPassword ? (
+              <button onClick={() => setShowPassword(!showPassword)}>
+                Get Started
+              </button>
+            ) : (
+              <button onClick={() => setShowPassword(!showPassword)}>
+                Sign Up
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -55,12 +66,18 @@ const Container = styled.div`
   .form {
     display: grid;
     width: 60%;
+    text-align: center;
+    grid-template-columns: ${({ showPassword }) =>
+      showPassword ? "1fr 2fr" : "1fr 1fr"};
     input {
       padding: 1.5rem;
+      width: 60%;
       &:focus {
         outline: none;
       }
     }
+    display: flex;
+    justify-content: center;
     button {
       padding: 0.5rem;
       background-color: red;
@@ -72,13 +89,13 @@ const Container = styled.div`
     }
   }
   h1 {
-    padding: 0 2rem;
+    padding: 0 4rem;
   }
   h4 {
-    margin-top: -1.5rem;
+    margin: 2rem;
   }
   h6 {
-    margin-top: -1.5rem;
+    margin-top: 2rem;
   }
 `;
 
