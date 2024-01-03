@@ -12,7 +12,7 @@ function LoginPage() {
         <div className="form-warpper">
           <div className="form">
             <div className="title">
-              <h1>Login</h1>
+              <h1>Log in</h1>
             </div>
             <div className="container">
               <input type="email" placeholder="e-mail" />
